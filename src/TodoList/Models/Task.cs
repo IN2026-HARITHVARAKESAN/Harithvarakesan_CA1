@@ -15,12 +15,13 @@ namespace TodoList.Models
         /// <param name="description">Description of the task</param>
         /// <param name="date">Target Date of the task</param>
         /// <param name="recurrence">Recurrence of the task</param>
+        /// <param name="userId">Id of the user</param>
         public Task(string id, string heading, string description, DateOnly date, Utility.Recurrence recurrence, string userId)
         {
             this.Id = id;
             this.Heading = heading;
             this.Description = description;
-            this.TargetDate = date;
+            this.TargetDate = date.ToDateTime(new TimeOnly(00, 00));
             this.Recurrence = recurrence;
             this.Status = Utility.TaskStatus.NotYetStarted;
             this.UserId = userId;
@@ -54,7 +55,7 @@ namespace TodoList.Models
         /// Gets or sets the Target Date for the task
         /// </summary>
         /// <value>Target Date of the task</value>
-        public DateOnly TargetDate { get; set; }
+        public DateTime TargetDate { get; set; }
 
         /// <summary>
         /// Gets or sets the Recurrence of the task

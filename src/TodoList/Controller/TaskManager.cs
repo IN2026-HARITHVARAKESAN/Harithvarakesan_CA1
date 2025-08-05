@@ -18,6 +18,7 @@ namespace TodoList.Controller
         /// <param name="userId">Id of the user</param>
         public static void DisplayTaskMenu(string userId)
         {
+            Dashboard(userId);
             int userChoice = 0;
             do
             {
@@ -27,11 +28,11 @@ namespace TodoList.Controller
                     "[3]. Edit existing task\n" +
                     "[4]. Remove existing task\n" +
                     "[5]. View Upcoming task\n" +
-                    "[6]. Exit\n" +
+                    "[6]. LogOut\n" +
                     "Enter index of your choice : ",
                     endLine: " ");
 
-                userChoice = InputGetter.GetIndex(5);
+                userChoice = InputGetter.GetIndex(6);
 
                 switch (userChoice)
                 {
@@ -51,10 +52,38 @@ namespace TodoList.Controller
                         ViewUpcomingTask(userId);
                         break;
                     case 6:
+                        JsonHandler.WriteJsonFile<Models.Task>(Utility.Tasks);
                         return;
                 }
             }
             while (userChoice != 6);
+        }
+
+        /// <summary>
+        /// Displays Users few upcoming task 
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        public static void Dashboard(string userId)
+        {
+            Utility.DisplayMessage("Upcoming Task :", ConsoleColor.Blue);
+
+            List<Models.Task> tasks = Utility.Tasks.Where(task => userId.Equals(userId) && task.TargetDate.CompareTo(DateOnly.FromDateTime(DateTime.Now)) > 0)
+                .OrderBy(task => task.TargetDate)
+                .Take(5)
+                .ToList();
+            if (tasks.Count == 0)
+            {
+                Utility.DisplayMessage("There is no existing task....", ConsoleColor.Red);
+                return;
+            }
+
+            ConsoleTable table = new ConsoleTable("Task Id", "Heading", "Description", "Target Date", "Status", "Recurrence");
+            foreach (var task in tasks)
+            {
+                table.AddRow(task.Id, task.Heading, task.Description, task.TargetDate, task.Status.ToString(), task.Recurrence.ToString());
+            }
+
+            table.Write();
         }
 
         /// <summary>
@@ -64,7 +93,6 @@ namespace TodoList.Controller
         public static void AddTask(string userId)
         {
             string taskId = "T" + Utility.GenerateId<Models.Task>();
-            Console.WriteLine(taskId);
 
             Utility.DisplayMessage("Enter new task heading : ", endLine: " ");
             string heading = InputGetter.GetInput();
@@ -144,7 +172,7 @@ namespace TodoList.Controller
                     task.Description = InputGetter.GetInput();
                     break;
                 case 3:
-                    task.TargetDate = InputGetter.GetDate();
+                    task.TargetDate = InputGetter.GetDate().ToDateTime(new TimeOnly(14, 30));
                     break;
                 case 4:
                     task.Status = InputGetter.GetStatus();
@@ -212,6 +240,10 @@ namespace TodoList.Controller
             }
 
             table.Write();
+
+            Utility.DisplayMessage("\nPress Any Key to continue...", ConsoleColor.Yellow);
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

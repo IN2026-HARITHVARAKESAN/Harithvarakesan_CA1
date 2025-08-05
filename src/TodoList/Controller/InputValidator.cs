@@ -13,7 +13,7 @@ namespace TodoList.Controller
     internal class InputValidator
     {
         /// <summary>
-        /// Validates User Id 
+        /// Validates User Id
         /// </summary>
         /// <param name="userId">Id of the User</param>
         /// <returns>Return true if Id is valid, else return false</returns>

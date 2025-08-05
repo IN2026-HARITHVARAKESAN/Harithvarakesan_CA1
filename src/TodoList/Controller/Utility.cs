@@ -8,16 +8,6 @@ namespace TodoList.Controller
     internal class Utility
     {
         /// <summary>
-        /// Gets or sets the list of task
-        /// </summary>
-        public static List<Models.Task> Tasks = new List<Models.Task>();
-
-        /// <summary>
-        /// Gets or sets the list of User
-        /// </summary>
-        public static List<User> Users = new List<User>() { new User() { Id = "U0001", Name = "Hello", Password = "password" } };
-
-        /// <summary>
         /// Status of the task
         /// </summary>
         public enum TaskStatus
@@ -63,6 +53,18 @@ namespace TodoList.Controller
             /// </summary>
             None,
         }
+
+        /// <summary>
+        /// Gets or sets the list of task
+        /// </summary>
+        /// <value>Contains list of task</value>
+        public static List<Models.Task> Tasks { get; set; } = JsonHandler.ReadJSONFile<Models.Task>();
+
+        /// <summary>
+        /// Gets or sets the list of User
+        /// </summary>
+        /// <value>Contains list of Users</value>
+        public static List<User> Users { get; set; } = JsonHandler.ReadJSONFile<User>();
 
         /// <summary>
         /// Display the message to console
@@ -123,11 +125,11 @@ namespace TodoList.Controller
         /// <returns>Returns generated Id</returns>
         public static string GenerateId<T>()
         {
-            if (typeof(T) == typeof(User) && Users.Count() == 0)
+            if (typeof(T) == typeof(User) && Users.Count == 0)
             {
                 return "0001";
             }
-            else if (typeof(T) == typeof(Models.Task) && Tasks.Count() == 0)
+            else if (typeof(T) == typeof(Models.Task) && Tasks.Count == 0)
             {
                 return "0001";
             }

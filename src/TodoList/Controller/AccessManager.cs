@@ -32,7 +32,11 @@ namespace TodoList.Controller
                 Utility.DisplayMessage("\nIncorrect Password!!..Try Again", ConsoleColor.Red);
             }
 
-            Utility.DisplayMessage("\nLogin Successfull", ConsoleColor.Green);
+            Utility.DisplayMessage("\nLogin Successful", ConsoleColor.Green);
+
+            Utility.DisplayMessage("\nPress Any Key to continue...", ConsoleColor.Yellow);
+            Console.ReadKey();
+            Console.Clear();
 
             TaskManager.DisplayTaskMenu(id);
             return;
@@ -50,8 +54,13 @@ namespace TodoList.Controller
 
             Utility.Users.Add(new () { Id = id, Name = name, Password = password });
 
-            Utility.DisplayMessage("User Created Successfully", ConsoleColor.Green);
+            Utility.DisplayMessage($"User Created Successfully\nYour User Id is {id}", ConsoleColor.Green);
+            Utility.DisplayMessage("Keep a note of User Id to login", ConsoleColor.Yellow);
+            JsonHandler.WriteJsonFile<User>(Utility.Users);
 
+            Utility.DisplayMessage("\nPress Any Key to continue...", ConsoleColor.Yellow);
+            Console.ReadKey();
+            Console.Clear();
             return;
         }
     }
