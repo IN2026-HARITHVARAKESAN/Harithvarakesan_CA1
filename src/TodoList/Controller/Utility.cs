@@ -8,16 +8,6 @@ namespace TodoList.Controller
     internal class Utility
     {
         /// <summary>
-        /// Gets or sets the list of task
-        /// </summary>
-        public static List<Models.Task> Tasks = JsonHandler.ReadJSONFile<Models.Task>();
-
-        /// <summary>
-        /// Gets or sets the list of User
-        /// </summary>
-        public static List<User> Users = JsonHandler.ReadJSONFile<User>();
-
-        /// <summary>
         /// Status of the task
         /// </summary>
         public enum TaskStatus
@@ -63,6 +53,18 @@ namespace TodoList.Controller
             /// </summary>
             None,
         }
+
+        /// <summary>
+        /// Gets or sets the list of task
+        /// </summary>
+        /// <value>Contains list of task</value>
+        public static List<Models.Task> Tasks { get; set; } = JsonHandler.ReadJSONFile<Models.Task>();
+
+        /// <summary>
+        /// Gets or sets the list of User
+        /// </summary>
+        /// <value>Contains list of Users</value>
+        public static List<User> Users { get; set; } = JsonHandler.ReadJSONFile<User>();
 
         /// <summary>
         /// Display the message to console
