@@ -39,9 +39,9 @@ namespace TodoList.Controller
         }
 
         /// <summary>
-        /// Reccurance of the task
+        /// Recurrence of the task
         /// </summary>
-        public enum Reccurance
+        public enum Recurrence
         {
             /// <summary>
             /// Task is repeated daily
@@ -73,7 +73,7 @@ namespace TodoList.Controller
         public static void DisplayMessage(string message, ConsoleColor color = ConsoleColor.White, string endLine = "\n")
         {
             Console.ForegroundColor = color;
-            Console.WriteLine(message);
+            Console.Write(message + endLine);
             Console.ResetColor();
         }
 
@@ -89,26 +89,26 @@ namespace TodoList.Controller
             do
             {
                 Utility.DisplayMessage("Enter Password :", endLine: " ");
-                password1 = InputGetter.GetInput();
+                password1 = InputGetter.GetPassword();
                 bool isValidPassword = InputValidator.ValidatePassword(password1);
                 if (!isValidPassword)
                 {
-                    Utility.DisplayMessage("Invalid Password!!... Password must contain atleast 8 character, 1 Upper case, 1 Lower case, 1 digit and 1 special character.", ConsoleColor.Red);
+                    Utility.DisplayMessage("\nInvalid Password!!... Password must contain atleast 8 character, 1 Upper case, 1 Lower case, 1 digit and 1 special character.", ConsoleColor.Red);
                     continue;
                 }
 
-                Utility.DisplayMessage("Re-Enter Password :", endLine: " ");
-                password2 = InputGetter.GetInput();
+                Utility.DisplayMessage("\nRe-Enter Password :", endLine: " ");
+                password2 = InputGetter.GetPassword();
                 isValidPassword = InputValidator.ValidatePassword(password2);
                 if (!isValidPassword)
                 {
-                    Utility.DisplayMessage("Invalid Password!!... Password must contain atleast 8 character, 1 Upper case, 1 Lower case, 1 digit and 1 special character.", ConsoleColor.Red);
+                    Utility.DisplayMessage("\nInvalid Password!!... Password must contain atleast 8 character, 1 Upper case, 1 Lower case, 1 digit and 1 special character.", ConsoleColor.Red);
                     continue;
                 }
 
                 if (!password1.Equals(password2))
                 {
-                    Utility.DisplayMessage("Password Does not match. Try Again!!...", ConsoleColor.Red);
+                    Utility.DisplayMessage("\nPassword Does not match. Try Again!!...", ConsoleColor.Red);
                 }
             }
             while (!password1.Equals(password2));
@@ -134,7 +134,7 @@ namespace TodoList.Controller
 
             string? lastId = typeof(T) == typeof(Models.Task) ? Tasks.Last().Id : Users.Last().Id;
             int lastIdInt = int.Parse(lastId.Substring(1));
-
+            Console.WriteLine(lastId);
             return $"{(lastIdInt + 1):D4}";
         }
     }

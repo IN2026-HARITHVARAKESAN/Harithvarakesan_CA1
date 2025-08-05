@@ -8,6 +8,25 @@ namespace TodoList.Models
     internal class Task
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Task"/> class.
+        /// </summary>
+        /// <param name="id">Id of the task</param>
+        /// <param name="heading">Heading of the task</param>
+        /// <param name="description">Description of the task</param>
+        /// <param name="date">Target Date of the task</param>
+        /// <param name="recurrence">Recurrence of the task</param>
+        public Task(string id, string heading, string description, DateOnly date, Utility.Recurrence recurrence, string userId)
+        {
+            this.Id = id;
+            this.Heading = heading;
+            this.Description = description;
+            this.TargetDate = date;
+            this.Recurrence = recurrence;
+            this.Status = Utility.TaskStatus.NotYetStarted;
+            this.UserId = userId;
+        }
+
+        /// <summary>
         /// Gets or sets the Id of the task
         /// </summary>
         /// <value>Id of the task</value>
@@ -38,9 +57,15 @@ namespace TodoList.Models
         public DateOnly TargetDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the Reccurance of the task
+        /// Gets or sets the Recurrence of the task
         /// </summary>
-        /// <value>Reccurance of the task</value>
-        public Utility.Reccurance Reccurance { get; set; }
+        /// <value>Recurrence of the task</value>
+        public Utility.Recurrence Recurrence { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Id of the user
+        /// </summary>
+        /// <value>Id of the user</value>
+        public string? UserId { get; set; }
     }
 }

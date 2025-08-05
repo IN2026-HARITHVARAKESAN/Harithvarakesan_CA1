@@ -43,5 +43,26 @@ namespace TodoList.Controller
 
             return isValidPassword;
         }
+
+        /// <summary>
+        /// Validate the given date and check the date is not greater than current date
+        /// </summary>
+        /// <param name="date">Date of the task</param>
+        /// <returns>Return true if the date is valid, else returns false</returns>
+        public static bool ValidateDate(string date)
+        {
+            return DateOnly.TryParse(date, out DateOnly parsedDate) && parsedDate.CompareTo(DateOnly.FromDateTime(DateTime.Now)) > 0;
+        }
+
+        /// <summary>
+        /// Validate the task Id given
+        /// </summary>
+        /// <param name="taskId">Id of the task</param>
+        /// <param name="userId">Id of the User</param>
+        /// <returns>Returns true if the task already exist, else return false</returns>
+        public static bool ValidateTaskId(string taskId, string userId)
+        {
+            return Utility.Tasks.Any(task => task.Id.Equals(taskId, StringComparison.OrdinalIgnoreCase) && task.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }
