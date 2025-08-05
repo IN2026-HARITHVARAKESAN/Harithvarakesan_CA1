@@ -21,7 +21,7 @@ namespace TodoList.Models
             this.Id = id;
             this.Heading = heading;
             this.Description = description;
-            this.TargetDate = date;
+            this.TargetDate = date.ToDateTime(new TimeOnly(00, 00));
             this.Recurrence = recurrence;
             this.Status = Utility.TaskStatus.NotYetStarted;
             this.UserId = userId;
@@ -55,7 +55,7 @@ namespace TodoList.Models
         /// Gets or sets the Target Date for the task
         /// </summary>
         /// <value>Target Date of the task</value>
-        public DateOnly TargetDate { get; set; }
+        public DateTime TargetDate { get; set; }
 
         /// <summary>
         /// Gets or sets the Recurrence of the task

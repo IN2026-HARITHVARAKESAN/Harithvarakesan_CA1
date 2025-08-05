@@ -172,7 +172,7 @@ namespace TodoList.Controller
                     task.Description = InputGetter.GetInput();
                     break;
                 case 3:
-                    task.TargetDate = InputGetter.GetDate();
+                    task.TargetDate = InputGetter.GetDate().ToDateTime(new TimeOnly(14, 30));
                     break;
                 case 4:
                     task.Status = InputGetter.GetStatus();
