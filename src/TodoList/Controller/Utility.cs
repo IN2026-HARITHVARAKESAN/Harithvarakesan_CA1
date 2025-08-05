@@ -10,12 +10,12 @@ namespace TodoList.Controller
         /// <summary>
         /// Gets or sets the list of task
         /// </summary>
-        public static List<Models.Task> Tasks = new List<Models.Task>();
+        public static List<Models.Task> Tasks = JsonHandler.ReadJSONFile<Models.Task>();
 
         /// <summary>
         /// Gets or sets the list of User
         /// </summary>
-        public static List<User> Users = new List<User>() { new User() { Id = "U0001", Name = "Hello", Password = "password" } };
+        public static List<User> Users = JsonHandler.ReadJSONFile<User>();
 
         /// <summary>
         /// Status of the task
@@ -123,11 +123,11 @@ namespace TodoList.Controller
         /// <returns>Returns generated Id</returns>
         public static string GenerateId<T>()
         {
-            if (typeof(T) == typeof(User) && Users.Count() == 0)
+            if (typeof(T) == typeof(User) && Users.Count == 0)
             {
                 return "0001";
             }
-            else if (typeof(T) == typeof(Models.Task) && Tasks.Count() == 0)
+            else if (typeof(T) == typeof(Models.Task) && Tasks.Count == 0)
             {
                 return "0001";
             }

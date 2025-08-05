@@ -15,6 +15,7 @@ namespace TodoList.Models
         /// <param name="description">Description of the task</param>
         /// <param name="date">Target Date of the task</param>
         /// <param name="recurrence">Recurrence of the task</param>
+        /// <param name="userId">Id of the user</param>
         public Task(string id, string heading, string description, DateOnly date, Utility.Recurrence recurrence, string userId)
         {
             this.Id = id;

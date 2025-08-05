@@ -1,16 +1,53 @@
-# 🎯 How to use C# Starter Repo for C# assignments 
- 1. While creating new repo add the “CSharp_Starter_Repo” template repository
-![Using Template repo](https://github.com/solitontech/CSharp_Starter_Repo/blob/main/docs/assets/Images/HowToUseStarterRepo_Images/HowToUseStarterRepo.jpg) 
- 2. Make your account as the owner of the repository and include all the branches.
- 3. Add description to your repository if needed.
- 4. Select private/public repository based on the needs.
- 5. Now click create repository and your repository will be created.
- 6. Add git hooks scripts - [How to add git hooks](https://github.com/solitontech/CSharp_Starter_Repo/blob/main/docs/GitHooks.md)
- 7. Ensure that your branch names and commit messages follow this syntax: [GuideLines](https://github.com/solitontech/CSharp_Starter_Repo/blob/313030ea36043f4d2a6eb4258c68b31737cacc26/docs/Guidelines%20for%20GIT.md)
- 8. Add VSIX template -  [How to add VSIX template](https://github.com/solitontech/CSharp_Starter_Repo/blob/main/docs/VSIX%20template%20Manual.md)
- 9. Open the solution file in the root directory.
- 10. While adding new project select the CSharpStarterTemplate and select the appropriate folder location.
-     (src - for assignments and tests/unit - for unit tests)
- 11. For every assignments create a new branch from main and add your project to the solution.
- 12. When build is susccessful and the project runs perfectly give PR to main branch.
- 13. After merging to main, create new branch and add new project for next assignment.
+## Todo List
+The ToDoAPP is a utility to help its users keep track of their tasks and timelines. With this app, each individual user, who has a unique login, can store and view the tasks listed by them along with target date.
+
+## Design :
+### Models :
+- User :
+	- User Id (String)
+	- Password (String)
+	- Name (String)
+- Task :
+	- Id (String)
+	- Heading (String)
+	- Description (String)
+	- Status (Enum)
+		- Completed
+		- Pending
+		- NotYetStarted
+	- TargetDate (DateTime)
+	- Recurrence (Enum)
+		- Daily
+		- Monthly
+		- Annually
+	- UserId (String)
+
+### Flow :
+User Create Account -> Login -> Dashboard -> Menu -> CRUD Task -> View Upcoming Task -> Share Task
+
+### Structure:
+- Controller :
+	- AccessManager (Login & SignUp operation)
+	- TaskManager (CRUD operation)
+		- Add New Task
+		- Edit Exiting Task
+		- Remove Existing Task
+		- View Task (with filter option)
+	- InputGetter
+	- InputValidator 
+	- Utility (Helper functions)
+	- JsonHandler
+- View :
+	- MenuDisplay (Display menus that a user can perform and navigate to other other functions in Controller)
+- DataBase :
+	- User - Consist users list and details.
+	- Task - Task details with user id as a foreign key.
+
+
+### Functionalities :
+- User Authentication
+- Add New Task
+- Edit Exiting Task
+- Remove Existing Task
+- View Task (with filter option)
+- Stores datas in Json file
